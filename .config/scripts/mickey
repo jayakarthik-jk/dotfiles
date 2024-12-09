@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Save current directory
+current_dir=$(pwd)
+
+# Change directory to SERVER_HOME/bin
+cd "$SERVER_HOME/bin" || exit 1
+
+# Run the custom script app_ctl.sh with all command-line arguments
+sh ./app_ctl.sh "$@"
+
+# Change back to the original directory
+cd "$current_dir" || exit 1
