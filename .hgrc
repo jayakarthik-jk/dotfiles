@@ -1,0 +1,17 @@
+[extensions]
+extdiff =
+rebase =
+strip =
+
+[ui]
+username = jayakarthik.k
+merge = codium
+
+[merge-tools]
+code.priority = 100
+code.premerge = True
+code.args = --wait --merge $other $local $base $output
+
+[extdiff]
+cmd.vsd = code
+opts.vsd = --wait --diff
