@@ -9,14 +9,11 @@
 # alias update='sudo apt-get update -y && sudo apt-get upgrade -y'
 # alias clean='sudo apt autoremove && sudo apt autoclean'
 # alias up='update && clean'
-#
-# # bottom prompt
-# # alias prompt-bottom='printf '\e[H\ec\e[${LINES}B''
-# # alias clear='clear && prompt-bottom'
-# # prompt-bottom
+
 
 # clear
 alias cls='clear'
+# alias cls='clear && prompt-bottom'
 
 # Zoxide
 alias cd=z
@@ -48,3 +45,5 @@ alias hamend='hg commit --amend --no-edit'
 alias python=python3
 
 alias ff='fzf --preview "bat --style=numbers --color=always {}"'
+
+alias prompt-bottom='printf "\n%.0s" {1..100}'

@@ -11,7 +11,10 @@ if wezterm.config_builder then
 end
 
 config.hide_tab_bar_if_only_one_tab = true
--- config.window_decorations = "NONE"
+config.tab_bar_at_bottom = true
+config.window_decorations = "RESIZE"
+
+config.font = wezterm.font('JetBrains Mono', { weight = 'Regular', italic = true })
 
 config.keys = {
 	{
