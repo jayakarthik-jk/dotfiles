@@ -19,53 +19,58 @@ config.font = wezterm.font('JetBrains Mono', { weight = 'Regular', italic = true
 config.keys = {
 	{
 		key = "|",
-		mods = "SHIFT|CTRL",
+		mods = "ALT|SHIFT",
 		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 	},
 	{
 		key = "_",
-		mods = "SHIFT|CTRL",
+		mods = "ALT|SHIFT",
 		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
 	},
 	{
 		key = "h",
-		mods = "CTRL",
+		mods = "ALT",
 		action = wezterm.action.ActivatePaneDirection 'Left',
 	},
 	{
 		key = "l",
-		mods = "CTRL",
+		mods = "ALT",
 		action = wezterm.action.ActivatePaneDirection 'Right',
 	},
 	{
 		key = "k",
-		mods = "CTRL",
+		mods = "ALT",
 		action = wezterm.action.ActivatePaneDirection 'Up',
 	},
 	{
 		key = "j",
-		mods = "CTRL",
+		mods = "ALT",
 		action = wezterm.action.ActivatePaneDirection 'Down',
 	},
 	{
 		key = "h",
-		mods = "CTRL|SHIFT",
+		mods = "ALT|SHIFT",
 		action = wezterm.action.AdjustPaneSize { 'Left', 5 },
 	},
 	{
 		key = "l",
-		mods = "CTRL|SHIFT",
+		mods = "ALT|SHIFT",
 		action = wezterm.action.AdjustPaneSize { 'Right', 5 },
 	},
 	{
 		key = "k",
-		mods = "CTRL|SHIFT",
+		mods = "ALT|SHIFT",
 		action = wezterm.action.AdjustPaneSize { 'Up', 5 },
 	},
 	{
 		key = "j",
-		mods = "CTRL|SHIFT",
+		mods = "ALT|SHIFT",
 		action = wezterm.action.AdjustPaneSize { 'Down', 5 },
+	},
+	{
+		key = "p",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.DisableDefaultAssignment,
 	}
 }
 
