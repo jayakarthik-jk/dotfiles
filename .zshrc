@@ -27,9 +27,11 @@ export XDG_CONFIG_HOME="$HOME/dotfiles/.config"
 # fzf
 source <(fzf --zsh)
 
+# Added in nushell
 # starship
-eval "$(starship init zsh)"
-
+# eval "$(starship init zsh)"
 # Zoxide
-eval "$(zoxide init zsh)"
+# eval "$(zoxide init zsh)"
 
+nu
+exit
