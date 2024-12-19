@@ -36,6 +36,7 @@ return {
 					})
 				end
 			},
+			'nvim-java/nvim-java',
 			{
 				"williamboman/mason-lspconfig.nvim",
 				opts = {
@@ -54,7 +55,8 @@ return {
 						-- "biome",		-- npm i -g @biomejs/biome
 						-- "sqlls",		-- npm i -g sql-language-server
 						-- "gopls",		-- Install: go install golang.org/x/tools/gopls@latest, Uninstall: rm $HOME/go/bin/gopls
-						-- "pylsp",		-- pipx install python-lsp-server
+						"pylsp",		-- pipx install python-lsp-server
+						"jdtls",		-- brew uninstall jdtls
 					}
 				},
 				config = function(_, opts)

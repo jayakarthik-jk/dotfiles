@@ -1,15 +1,15 @@
-
-local function map(mode, lhs, rhs)
-	vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true })
+local function map(mode, lhs, rhs, desc)
+	desc = desc or ''
+	vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, desc = desc })
 end
 
 local function cmd(code)
-	return "<CMD>" .. code .. "<CR>"
+       return "<CMD>" .. code .. "<CR>"
 end
 
 local hardmode = true
 if hardmode then
-	for _, mode in pairs({ "n", "v", "i" }) do
+	for _, mode in pairs({ 'n', 'v', 'i' }) do
 		map(mode, "<Up>", "<Nop>")
 		map(mode, "<Down>", "<Nop>")
 		map(mode, "<Left>", "<Nop>")
@@ -17,50 +17,40 @@ if hardmode then
 	end
 end
 
--- move line
-map("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==")
-map("n", "<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==")
-map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi")
-map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi")
-map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv")
-map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv")
-
 -- Copy to clipboard
-map({ "n", "x" }, "y", '"+y')
-map({ "n", "x" }, "Y", '"+Y')
-map("n", "yy", '"+yy')
+map({ 'n', 'x' }, 'y', '"+y', "Copy to system buffer")
+map({ 'n', 'x' }, 'Y', '"+Y', "Copy to system buffer")
+map('n', "yy", '"+yy')
 
 -- Window focus change
-map("n", "<C-h>", "<C-w>h")
-map("n", "<C-j>", "<C-w>j")
-map("n", "<C-k>", "<C-w>k")
-map("n", "<C-l>", "<C-w>l")
+map('n', "<C-h>", "<C-w>h", "Focus left window")
+map('n', "<C-j>", "<C-w>j", "Focus bottom window")
+map('n', "<C-k>", "<C-w>k", "Focus top window")
+map('n', "<C-l>", "<C-w>l", "Focus right window")
 
 -- Custom
-map("n", "<leader>e", cmd "NvimTreeToggle")
+map('n', "<leader>e", cmd("NvimTreeToggle"), "Toggle Explorer")
 
 -- fzf
 local fzf = require("fzf-lua")
-local fzf_defaults = { fzf_opts = { ["--layout"] = "reverse-list" } }
-map('n', '<C-S-p>', function() fzf.commands() end)
-map("n", "<C-p>", function() fzf.files(fzf_defaults) end)
-map("n", "<leader> ", function() fzf.files(fzf_defaults) end)
-map("n", "<leader>g", function() fzf.live_grep() end)
+map('n', '<C-S-p>', fzf.commands, "Command Pallete")
+map("n", "<leader> ", fzf.files, "Search File")
+map("n", "<leader>sg", fzf.live_grep, "Global Search")
 
 -- harpoon
 local harpoon = require("harpoon")
-map('n', "<leader><Tab>", function() harpoon:list():next() end)
-map('n', "<leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-map('n', "<leader>a", function() harpoon:list():add() end)
+map('n', "<leader><Tab>", function() harpoon:list():next() end, "Switch to next harpoon tab")
+map('n', "<leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, "Show harpoon menu")
+map('n', "<leader>a", function() harpoon:list():add() end, "Add current file to harpoon")
 for i = 1, 9 do
-	map('n', "<C-" .. i .. ">", function() harpoon:list():select(i) end)
+	map('n', "<C-" .. i .. ">", function() harpoon:list():select(i) end, "Switch to " .. i .. "th harpoon tab")
 end
 
 -- Auto mark buffer
-vim.api.nvim_create_autocmd("BufReadPost", {
-	pattern = "*",
-	callback = function () harpoon:list():select() end
-})
+-- vim.api.nvim_create_autocmd("BufReadPost", {
+-- 	pattern = "*",
+-- 	callback = function () harpoon:list():select() end
+-- })
 
 -- execute this to remove mark
 -- local current_file_path = vim.fn.expand("%")
@@ -69,10 +59,12 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 -- Remove mark when quiting the buffer
 
 -- lsp
-map('n', 'K', function() vim.lsp.buf.hover() end)
-map('n', 'gd', function() vim.lsp.buf.definition() end)
-map('n', 'gD', function() vim.lsp.buf.declaration() end)
-map('n', 'gi', function() vim.lsp.buf.implementation() end)
-map('n', 'go', function() vim.lsp.buf.type_definition() end)
-map('n', 'gr', function() vim.lsp.buf.references() end)
-map('n', 'gs', function() vim.lsp.buf.signature_help() end)
+map('n', 'K', vim.lsp.buf.hover, "Hover Text")
+map('n', 'gd', vim.lsp.buf.definition, "Go to definition")
+map('n', 'gD', vim.lsp.buf.declaration, "Go to declaration")
+map('n', 'gi', vim.lsp.buf.implementation, "Go to implementation")
+map('n', 'go', vim.lsp.buf.type_definition, "Go to type definition")
+map('n', 'gr', vim.lsp.buf.references, "References")
+map('n', 'gs', vim.lsp.buf.signature_help, "Signature help")
+map('n', '<space>rn', vim.lsp.buf.rename, "Rename")
+map('n', '<space>ca', vim.lsp.buf.code_action, "Code actions")
