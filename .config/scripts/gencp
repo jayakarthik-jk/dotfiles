@@ -13,7 +13,11 @@ if [ ! -d "$source" ] || [ ! -d "$deployment" ]; then
   exit 1
 fi
 
-dependencies=$(find "$deployment" | grep .jar | sed 's\^\<classpathentry kind="lib" path="\' | sed 's\$\" />\')
+dependencies=$(find "$deployment" -name "*.jar")
+s=""
+for dependency in $dependencies; do
+    s+="<classpathentry kind=\"lib\" path=\"$dependency\"/>"
+done
 
 cat <<EOF >"$source"/.classpath
 <?xml version="1.0" encoding="UTF-8"?>
@@ -34,6 +38,6 @@ cat <<EOF >"$source"/.classpath
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="output" path="bin"/>
-  $dependencies
+$s
 </classpath>
 EOF

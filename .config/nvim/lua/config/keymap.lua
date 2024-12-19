@@ -34,8 +34,10 @@ map('n', "<leader>e", cmd("NvimTreeToggle"), "Toggle Explorer")
 -- fzf
 local fzf = require("fzf-lua")
 map('n', '<C-S-p>', fzf.commands, "Command Pallete")
-map("n", "<leader> ", fzf.files, "Search File")
-map("n", "<leader>sg", fzf.live_grep, "Global Search")
+map('n', "<leader> ", fzf.files, "Search File")
+map('n', "<leader>sg", fzf.live_grep, "Global Search")
+map('n', "<leader>ca", fzf.lsp_code_actions, "Code Actions")
+
 
 -- harpoon
 local harpoon = require("harpoon")
@@ -43,20 +45,9 @@ map('n', "<leader><Tab>", function() harpoon:list():next() end, "Switch to next 
 map('n', "<leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, "Show harpoon menu")
 map('n', "<leader>a", function() harpoon:list():add() end, "Add current file to harpoon")
 for i = 1, 9 do
-	map('n', "<C-" .. i .. ">", function() harpoon:list():select(i) end, "Switch to " .. i .. "th harpoon tab")
+	map('n', "<leader>" .. i, function() harpoon:list():select(i) end, "Switch to " .. i .. "th harpoon tab")
 end
 
--- Auto mark buffer
--- vim.api.nvim_create_autocmd("BufReadPost", {
--- 	pattern = "*",
--- 	callback = function () harpoon:list():select() end
--- })
-
--- execute this to remove mark
--- local current_file_path = vim.fn.expand("%")
--- local buf = harpoon:list():get_by_value(current_file_path)
--- harpoon:remove(buf)
--- Remove mark when quiting the buffer
 
 -- lsp
 map('n', 'K', vim.lsp.buf.hover, "Hover Text")
@@ -66,5 +57,6 @@ map('n', 'gi', vim.lsp.buf.implementation, "Go to implementation")
 map('n', 'go', vim.lsp.buf.type_definition, "Go to type definition")
 map('n', 'gr', vim.lsp.buf.references, "References")
 map('n', 'gs', vim.lsp.buf.signature_help, "Signature help")
-map('n', '<space>rn', vim.lsp.buf.rename, "Rename")
-map('n', '<space>ca', vim.lsp.buf.code_action, "Code actions")
+map('n', '<space>cr', vim.lsp.buf.rename, "Rename")
+-- removing here coz added with fzf
+-- map('n', '<space>ca', vim.lsp.buf.code_action, "Code actions")

@@ -1,9 +1,9 @@
--- removing command line
+-- -- removing command line
 -- vim.o.cmdheight = 0
--- -- enabing command line when recording
--- vim.cmd [[ autocmd RecordingEnter * set cmdheight=1 ]]
--- vim.cmd [[ autocmd RecordingLeave * set cmdheight=0 ]]
-
+-- -- enabing command line only on command mode
+-- vim.cmd [[ autocmd CmdlineEnter * set cmdheight=1 ]]
+-- vim.cmd [[ autocmd CmdlineLeave * set cmdheight=0 ]]
+vim.opt.showmode = false
 
 return {
 	'nvim-lualine/lualine.nvim',
@@ -21,20 +21,8 @@ return {
 				{ 'mode', separator = { left = '' }, right_padding = 2 },
 			},
 			lualine_b = { 'filename', 'branch' },
-			lualine_c = {
-				-- '%=',
-			},
-			lualine_x = {
-				{
-					function()
-						return "recording @" .. vim.fn.reg_recording()
-					end,
-					cond = function()
-						return vim.fn.reg_recording() ~= ""
-					end,
-					color = { fg = "#ff9e64" },
-				}
-			},
+			lualine_c = {},
+			lualine_x = {},
 			lualine_y = { 'filetype', 'progress' },
 			lualine_z = {
 				{ 'location', separator = { right = '' }, left_padding = 2 },
@@ -49,9 +37,6 @@ return {
 			lualine_z = { 'location' },
 		},
 		tabline = {},
-		extensions = {
-			-- "fzf",
-			-- "lazy"
-		},
+		extensions = {},
 	}
 }
