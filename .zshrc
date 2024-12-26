@@ -10,10 +10,14 @@ export JAVA_HOME=/opt/homebrew/opt/openjdk@21
 . "$HOME/.cargo/env"
 export MYSQL_HOME=/usr/local/mysql
 
+# Bat
+export BAT_THEME="TwoDark"
+
 # Path
 export PATH="$JAVA_HOME/bin:$PATH"
 export PATH="/usr/local/mysql/bin:$PATH"
 export PATH="$HOME/.config/scripts:$PATH"
+export PATH="$HOME/go/bin:$PATH"
 # Created by `pipx` on 2024-12-17 02:05:31
 export PATH="$PATH:/Users/jaya-21208/.local/bin"
 
@@ -27,8 +31,10 @@ export XDG_CONFIG_HOME="$HOME/.config"
 
 # fzf
 source <(fzf --zsh)
-
+# export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --exclude .git --exclude .hg --full-path'
 # starship
 eval "$(starship init zsh)"
 # Zoxide
 eval "$(zoxide init zsh)"
+
+

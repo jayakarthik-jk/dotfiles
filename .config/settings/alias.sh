@@ -40,7 +40,7 @@ alias restart_sql='stop_sql && start_sql'
 # Hg
 alias hl='hg log --graph --style compact -b $(hg branch)'
 alias hs='hg stat -m'
-alias hdiff='hg diff $(hs | sed "s/^M //" | fzf)'
+alias hdiff='hg st -mn | fzf --preview="hg diff {} | bat --language=diff -f -p"'
 alias cdiff='hg log -p -r'
 alias hamend='hg commit --amend --no-edit'
 

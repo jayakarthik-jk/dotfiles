@@ -1,16 +1,24 @@
 [ui]
 username = jayakarthik.k
-merge = codium
+
+[auth]
+repo.prefix = *
+repo.username = jayakarthik.k
 
 [extensions]
 hgext.extdiff =
 rebase =
 strip =
+# mercurial_keyrhgext.extdiff =ing = /Users/jaya-21208/Applications/mercurial_keyring/mercurial_keyring.py
 
 [extdiff]
 cmd.kdiff3 =
+cmd.delta =
 
 [merge-tools]
 kdiff3.executable = /Applications/kdiff3.app/Contents/MacOS/kdiff3
 kdiff3.priority = 1
 kdiff3.args = $base $local $other -o $output
+
+[alias]
+diff = delta

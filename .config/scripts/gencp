@@ -13,7 +13,7 @@ if [ ! -d "$source" ] || [ ! -d "$deployment" ]; then
   exit 1
 fi
 
-dependencies=$(find "$deployment" -name "*.jar")
+dependencies=$(fd \.jar $deployment -E '*mysql*')
 s=""
 for dependency in $dependencies; do
     s+="<classpathentry kind=\"lib\" path=\"$dependency\"/>"
@@ -34,7 +34,7 @@ cat <<EOF >"$source"/.classpath
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/request_perf_SDPLIVE"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/$1_SDPLIVE"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="output" path="bin"/>
