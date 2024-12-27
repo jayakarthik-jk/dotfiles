@@ -11,10 +11,13 @@ local function git_status ()
 	if contains_vcs_file(".git") then
 		fzf.git_status()
 	elseif contains_vcs_file(".hg") then
-		require'fzf-lua'.fzf_exec("hg st -mn", {
+		require'fzf-lua'.fzf_exec("hg st -n", {
 			fzf_opts = {
 				['--preview'] = "hg diff {}",
 			},
+			-- complete = function (selected)
+			-- 	vim.cmd('e ' .. selected[1])
+			-- end
 		})
 	else
 		print("No git or hg repository found in the current directory.")
@@ -30,6 +33,9 @@ return {
 			fzf_opts = {
 				["--info"] = "default",
 				["--layout"] = "reverse-list",
+			},
+			grep = {
+				rg_opts = "--hidden -g '!.git/**' -g '!.hg/**' --column --line-number --no-heading --color=always --smart-case --max-columns=4096 -e",
 			},
 			keymap = {
 				builtin = {

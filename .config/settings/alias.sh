@@ -29,7 +29,7 @@ alias gpo='git push origin'
 alias gpl='git pull origin'
 alias gpu='git push upstream'
 alias gplu='git pull upstream'
-alias log='git log --oneline --graph --all'
+alias gl='git log --oneline --graph --all'
 
 # Mysql
 alias sql='mysql -u root'

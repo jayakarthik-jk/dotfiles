@@ -13,7 +13,7 @@ if [ ! -d "$source" ] || [ ! -d "$deployment" ]; then
   exit 1
 fi
 
-dependencies=$(fd \.jar $deployment -E '*mysql*')
+dependencies=$(fd \.jar $deployment/AdventNet/Sas/tomcat/webapps/$1/WEB-INF/ -E '*mysql*')
 s=""
 for dependency in $dependencies; do
     s+="<classpathentry kind=\"lib\" path=\"$dependency\"/>"
