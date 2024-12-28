@@ -21,7 +21,8 @@ map('n', "<C-h>", "<C-w>h", "Focus left window")
 map('n', "<C-j>", "<C-w>j", "Focus bottom window")
 map('n', "<C-k>", "<C-w>k", "Focus top window")
 map('n', "<C-l>", "<C-w>l", "Focus right window")
-map('n', "<C-Bslash>", cmd "vsplit", "Split pane vertically")
+map('n', "<C-_>", cmd "split", "Split pane horizontally")
+map('n', "<C-S-Bslash>", cmd "vsplit", "Split pane vertically")
 
 -- Select pasted text
 map('n', "gp", "`[v`]", "Copy pasted text")

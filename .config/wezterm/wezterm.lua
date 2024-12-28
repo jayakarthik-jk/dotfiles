@@ -49,14 +49,14 @@ config.keys = {
 		action = action.DisableDefaultAssignment,
 	},
 	{
-		key = '|',
-		mods = "ALT|SHIFT",
-		action = action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+		key = 'd',
+		mods = "SUPER|SHIFT",
+		action = action.SplitVertical({ domain = "CurrentPaneDomain" }),
 	},
 	{
-		key = '_',
-		mods = "ALT|SHIFT",
-		action = action.SplitVertical({ domain = "CurrentPaneDomain" }),
+		key = 'd',
+		mods = "SUPER",
+		action = action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 	},
 	{
 		key = 'h',
