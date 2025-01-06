@@ -79,28 +79,28 @@ config.keys = {
 		action = action.ActivatePaneDirection("Down"),
 	},
 	{
-		key = 'h',
-		mods = "ALT|SHIFT",
+		key = 'LeftArrow',
+		mods = "ALT",
 		action = action.AdjustPaneSize({ "Left", 5 }),
 	},
 	{
-		key = 'l',
-		mods = "ALT|SHIFT",
+		key = 'RightArrow',
+		mods = "ALT",
 		action = action.AdjustPaneSize({ "Right", 5 }),
 	},
 	{
-		key = 'k',
-		mods = "ALT|SHIFT",
+		key = 'UpArrow',
+		mods = "ALT",
 		action = action.AdjustPaneSize({ "Up", 5 }),
 	},
 	{
-		key = 'j',
-		mods = "ALT|SHIFT",
+		key = 'DownArrow',
+		mods = "ALT",
 		action = action.AdjustPaneSize({ "Down", 5 }),
 	},
 	{
 		key = 'p',
-		mods = "CTRL|SHIFT",
+		mods = "CTRL",
 		action = action.DisableDefaultAssignment,
 	}
 }

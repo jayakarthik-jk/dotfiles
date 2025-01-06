@@ -9,6 +9,7 @@ return {
 		{ "H", utils.cmd "bprevious", mode = 'n', desc = "Go to left buffer" },
 		{ "L", utils.cmd "bnext", mode = 'n', desc = "Go to right buffer" },
 	},
+	lazy = false,
 	opts = {
 
 		options = {
@@ -32,7 +33,8 @@ return {
 					cond = function()
 						return #vim.fn.getbufinfo({ buflisted = 1 }) > 0
 					end,
-					separator = { left = '', right = '' },
+					-- separator = { left = '', right = '' },
+					separator = { left = '', right = '' },
 					use_mode_colors = true,
 					buffers_color = {
 						active = function()

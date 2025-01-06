@@ -1,13 +1,7 @@
-# custom settings files
-for setting_file in ~/.config/settings/*.sh; do
-  . "$setting_file"
-done
-
 # Environment variables
 export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
 export EDITOR=nvim
 export JAVA_HOME=/opt/homebrew/opt/openjdk@21
-. "$HOME/.cargo/env"
 export MYSQL_HOME=/usr/local/mysql
 
 # Bat
@@ -18,6 +12,7 @@ export PATH="$JAVA_HOME/bin:$PATH"
 export PATH="/usr/local/mysql/bin:$PATH"
 export PATH="$HOME/.config/scripts:$PATH"
 export PATH="$HOME/go/bin:$PATH"
+export PATH="$HOME/Applications/zig:$PATH"
 # Created by `pipx` on 2024-12-17 02:05:31
 export PATH="$PATH:/Users/jaya-21208/.local/bin"
 
@@ -29,6 +24,9 @@ export no_proxy=127.0.0.1,127.0.0.0/8,::1,*.zohomeeting.com,*.zohoassist.com,avc
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
+source "$HOME/.cargo/env"
+source "$HOME/.config/settings/alias.sh"
+
 # fzf
 source <(fzf --zsh)
 # export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --exclude .git --exclude .hg --full-path'
@@ -36,5 +34,3 @@ source <(fzf --zsh)
 eval "$(starship init zsh)"
 # Zoxide
 eval "$(zoxide init zsh)"
-
-

@@ -22,7 +22,7 @@ return {
 				gopls = {},			-- Install: go install golang.org/x/tools/gopls@latest, Uninstall: rm $HOME/go/bin/gopls
 				pylsp = {},			-- pipx install python-lsp-server
 				-- jdtls = {},		-- brew install jdtls
-				-- zls = {},		-- brew install zls
+				zls = {},		-- brew install zls
 			}
 		},
 		config = function (_, opts)

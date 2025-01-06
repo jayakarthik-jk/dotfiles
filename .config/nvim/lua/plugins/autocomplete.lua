@@ -12,11 +12,12 @@ return {
 			{ "gr", vim.lsp.buf.references, mode = 'n', desc = "References" },
 			{ "gs", vim.lsp.buf.signature_help, mode = 'n', desc = "Signature help" },
 			{ "<space>cr", vim.lsp.buf.rename, mode = 'n', desc = "Rename" },
+			{ "<space>cf", vim.lsp.buf.format, mode = 'n', desc = "Format" },
 		},
 		opts = {
 			keymap = {
 				preset = 'default',
-				['<CR>'] = { 'accept', 'fallback' },
+				['<CR>'] = { 'select_and_accept', 'fallback' },
 				['<C-k>'] = { 'select_prev', 'fallback' },
 				['<C-j>'] = { 'select_next', 'fallback' },
 			},

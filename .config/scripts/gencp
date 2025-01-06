@@ -13,11 +13,23 @@ if [ ! -d "$source" ] || [ ! -d "$deployment" ]; then
   exit 1
 fi
 
-dependencies=$(fd \.jar $deployment/AdventNet/Sas/tomcat/webapps/$1/WEB-INF/ -E '*mysql*')
+
+# tomcat_dependencies=$(fd \.jar $deployment/AdventNet/Sas/tomcat/lib -E '*mysql*')
+# dependencies=$(fd \.jar $deployment/AdventNet/Sas/tomcat/webapps/$1/WEB-INF/ -E '*mysql*')
+
+tomcat_dependencies=$(fd \.jar $deployment/AdventNet/Sas/tomcat/lib)
+dependencies=$(fd \.jar $deployment/AdventNet/Sas/tomcat/webapps/$1/WEB-INF)
+
 s=""
+for dependency in $tomcat_dependencies; do
+    s+="<classpathentry kind=\"lib\" path=\"$dependency\"/>"
+done
+
 for dependency in $dependencies; do
     s+="<classpathentry kind=\"lib\" path=\"$dependency\"/>"
 done
+
+# <classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/$1_SDPLIVE"/>
 
 cat <<EOF >"$source"/.classpath
 <?xml version="1.0" encoding="UTF-8"?>
