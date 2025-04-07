@@ -3,6 +3,7 @@ theme = Wez
 macos-titlebar-style = hidden
 macos-option-as-alt = true
 
+font-style = italic
 window-width = 75
 window-height = 25
 

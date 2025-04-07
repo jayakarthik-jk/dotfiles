@@ -14,7 +14,7 @@ return {
 				lua_ls = {},		-- brew install lua-language-server
 				rust_analyzer = {},	-- rustup component add rust-analyzer
 				prismals = {},		-- npm install -g @prisma/language-server
-				-- astro = {},		-- npm i -g @astrojs/language-server
+				astro = {},		-- npm i -g @astrojs/language-server
 				-- bashls = {},		-- npm i -g bash-language-server
 				-- dockerls = {},	-- npm i -g dockerfile-language-server-nodejs
 				-- biome = {},		-- npm i -g @biomejs/biome

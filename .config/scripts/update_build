@@ -1,0 +1,13 @@
+current=$(pwd)
+
+cd ~/builds/deployment/$1/AdventNet/Sas/tomcat/conf
+
+rm sas.keystore
+
+wget https://apptier.csez.zohocorpin.com/_static/keystore/2025-2026/sas.keystore --no-check-certificate
+
+sed -i '' 's/Nkpml@\#\$234/Nkpml@!df234/g' server.xml
+
+sed -i '' 's/Nkpml@\#\$234/Nkpml@!df234/g' server.xml.orig
+
+cd $current

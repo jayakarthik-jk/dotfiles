@@ -10,6 +10,9 @@
 # alias clean='sudo apt autoremove && sudo apt autoclean'
 # alias up='update && clean'
 
+alias update='brew update && brew upgrade'
+alias clean='brew cleanup --prune=all'
+alias up='update && clean'
 
 # clear
 alias cls='clear'
