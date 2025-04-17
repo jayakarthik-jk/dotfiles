@@ -8,15 +8,17 @@ export MYSQL_HOME=/usr/local/mysql
 export BAT_THEME="TwoDark"
 
 # Path
-export PATH="$JAVA_HOME/bin:$PATH"
-export PATH="/usr/local/mysql/bin:$PATH"
-export PATH="$HOME/.config/scripts:$PATH"
-export PATH="$HOME/go/bin:$PATH"
-export PATH="$HOME/Applications/zig:$PATH"
-export PATH="$HOME/Applications:$PATH"
+export PATH="$PATH:$JAVA_HOME/bin"
+export PATH="$PATH:$MYSQL_HOME/bin"
+export PATH="$PATH:$HOME/.config/scripts"
+export PATH="$PATH:$HOME/go/bin"
+export PATH="$PATH:$HOME/Applications/zig"
+export PATH="$PATH:$HOME/Applications"
 # Created by `pipx` on 2024-12-17 02:05:31
-export PATH="$PATH:/Users/jaya-21208/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 
+# Pali
+export PATH="$PATH:$HOME/Applications/pali"
 
 # Zero
 

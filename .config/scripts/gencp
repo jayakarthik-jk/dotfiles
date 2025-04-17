@@ -5,8 +5,8 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
-deployment="$HOME/ZIDE/deployment/$1"
-source="$HOME/ZIDE/$1"
+deployment="$HOME/builds/deployment/$1"
+source="$HOME/builds/$1"
 
 if [ ! -d "$source" ] || [ ! -d "$deployment" ]; then
   echo "project $1 not exists"
@@ -18,7 +18,7 @@ fi
 # dependencies=$(fd \.jar $deployment/AdventNet/Sas/tomcat/webapps/$1/WEB-INF/ -E '*mysql*')
 
 tomcat_dependencies=$(fd \.jar $deployment/AdventNet/Sas/tomcat/lib)
-dependencies=$(fd \.jar $deployment/AdventNet/Sas/tomcat/webapps/$1/WEB-INF)
+dependencies=$(fd \.jar $deployment/AdventNet/Sas/tomcat/webapps/grid/WEB-INF)
 
 s=""
 for dependency in $tomcat_dependencies; do
