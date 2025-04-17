@@ -9,7 +9,8 @@ export BAT_THEME="TwoDark"
 
 # Path
 export PATH="$PATH:$JAVA_HOME/bin"
-export PATH="$PATH:$MYSQL_HOME/bin"
+export PATH="$PATH:/usr/local/mysql/bin"
+export PATH="$PATH:/opt/homebrew/bin"
 export PATH="$PATH:$HOME/.config/scripts"
 export PATH="$PATH:$HOME/go/bin"
 export PATH="$PATH:$HOME/Applications/zig"
@@ -19,8 +20,6 @@ export PATH="$PATH:$HOME/.local/bin"
 
 # Pali
 export PATH="$PATH:$HOME/Applications/pali"
-
-# Zero
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
@@ -36,6 +35,9 @@ eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 
 bindkey -v
+
+# Zero
+export ZERO_HELPER_STATUS=ON
 
 export http_proxy=http://127.0.0.1:3128
 export https_proxy=http://127.0.0.1:3128
