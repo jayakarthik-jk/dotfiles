@@ -14,6 +14,10 @@ local function cmd(key, commands)
   hs.hotkey.bind({ "cmd" }, key, exec(commands))
 end
 
+local function alt(key, commands)
+  hs.hotkey.bind({ "alt" }, key, exec(commands))
+end
+
 local function cmd_shift(key, commands)
   hs.hotkey.bind({ "cmd", "shift" }, key, exec(commands))
 end
@@ -26,27 +30,29 @@ local function cmd_ctrl_shift(key, commands)
   hs.hotkey.bind({ "cmd", "ctrl", "shift" }, key, exec(commands))
 end
 
-local focus = "window --focus first"
+local focus_first_window = "window --focus first"
 
-cmd("Left", { "window --focus west" })
-cmd("Right", { "window --focus east" })
-cmd("Up", { "window --focus north" })
-cmd("Down", { "window --focus south" })
+-- don't overkill
 
-cmd_shift("Left", { "window --resize left:-20:0", "window --resize right:-20:0" })
-cmd_shift("Right", { "window --resize right:20:0", "window --resize left:20:0" })
-cmd_shift("Up", { "window --resize top:0:-20", "window --resize bottom:0:-20" })
-cmd_shift("Down", { "window --resize bottom:0:20", "yabai -m window --resize top:0:20" })
+-- cmd("Left", { "window --focus west" })
+-- cmd("Right", { "window --focus east" })
+-- cmd("Up", { "window --focus north" })
+-- cmd("Down", { "window --focus south" })
 
-cmd_ctrl_shift("Left", { "window --warp west" })
-cmd_ctrl_shift("Right", { "window --warp east" })
-cmd_ctrl_shift("Up", { "window --warp north" })
-cmd_ctrl_shift("Down", { "window --warp south" })
+-- cmd_shift("Left", { "window --resize left:-20:0", "window --resize right:-20:0" })
+-- cmd_shift("Right", { "window --resize right:20:0", "window --resize left:20:0" })
+-- cmd_shift("Up", { "window --resize top:0:-20", "window --resize bottom:0:-20" })
+-- cmd_shift("Down", { "window --resize bottom:0:20", "yabai -m window --resize top:0:20" })
+
+-- cmd_ctrl_shift("Left", { "window --warp west" })
+-- cmd_ctrl_shift("Right", { "window --warp east" })
+-- cmd_ctrl_shift("Up", { "window --warp north" })
+-- cmd_ctrl_shift("Down", { "window --warp south" })
 
 for i = 1, 9 do
-	cmd(tostring(i), { "space --focus " .. i, focus })
+	cmd(tostring(i), { "space --focus " .. i, focus_first_window })
 end
 
 for i = 1, 9 do
-	alt_shift(tostring(i), { "window --space " .. i, "space --focus " .. i, focus })
+	alt_shift(tostring(i), { "space --move " .. i, "space --focus " .. i, focus_first_window })
 end

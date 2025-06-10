@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "coc-comrade": ">=0.0.2"
+  }
+}

@@ -48,7 +48,7 @@ alias cdiff='hg log -p -r'
 alias hamend='hg commit --amend --no-edit'
 
 # python
-alias python=python3
+# alias python=python3
 alias pip=pip3
 
 alias ff='fzf --preview "bat --style=numbers --color=always {}"'
@@ -56,7 +56,20 @@ alias ff='fzf --preview "bat --style=numbers --color=always {}"'
 alias prompt-bottom='printf "\n%.0s" {1..100}'
 
 # Idea
-alias idea=idea-ce
+alias idea="/Applications/IntelliJ\ IDEA\ CE.app/Contents/MacOS/idea"
 
 # scripts
 alias logs='less +F $HOME/builds/deployment/$(ls $HOME/builds/deployment | fzf)/AdventNet/Sas/logs/zoho-SDPOnDemand-application0.txt'
+
+alias pod=podman
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+alias deployment='cd $HOME/builds/deployment && cd $(ls | fzf)'

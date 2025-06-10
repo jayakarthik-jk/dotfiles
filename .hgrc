@@ -9,16 +9,27 @@ repo.username = jayakarthik.k
 hgext.extdiff =
 rebase =
 strip =
+color =
+share =
 hgext.mercurial_keyring = /Users/jaya-21208/Applications/mercurial_keyring/mercurial_keyring.py
 
-[extdiff]
-cmd.kdiff3 =
-cmd.delta =
+# [extdiff]
+# cmd.kdiff3 =
+# cmd.delta =
+
+# Kdiff
+# [merge-tools]
+# kdiff3.executable = /Applications/kdiff3.app/Contents/MacOS/kdiff3
+# kdiff3.priority = 1
+# kdiff3.args = $base $local $other -o $output
 
 [merge-tools]
-kdiff3.executable = /Applications/kdiff3.app/Contents/MacOS/kdiff3
-kdiff3.priority = 1
-kdiff3.args = $base $local $other -o $output
+p4.priority = 60
+p4.premerge = True
+p4.executable = /Applications/p4merge.app/Contents/MacOS/p4merge
+p4.gui = True
+p4.args = $base $local $other $output
+p4.binary = False
 
 # [alias]
 # diff = delta
