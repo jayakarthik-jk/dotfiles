@@ -6,18 +6,15 @@ local function contains_vcs_file(file)
 	return result == "1"
 end
 
-local function git_status ()
+local function git_status()
 	local fzf = require("fzf-lua")
 	if contains_vcs_file(".git") then
 		fzf.git_status()
 	elseif contains_vcs_file(".hg") then
-		require'fzf-lua'.fzf_exec("hg st -n", {
+		require 'fzf-lua'.fzf_exec("hg st -n", {
 			fzf_opts = {
 				['--preview'] = "hg diff {}",
 			},
-			-- complete = function (selected)
-			-- 	vim.cmd('e ' .. selected[1])
-			-- end
 		})
 	else
 		print("No git or hg repository found in the current directory.")
@@ -35,7 +32,8 @@ return {
 				["--layout"] = "reverse-list",
 			},
 			grep = {
-				rg_opts = "--hidden -g '!.git/**' -g '!.hg/**' --column --line-number --no-heading --color=always --smart-case --max-columns=4096 -e",
+				rg_opts =
+				"--hidden -g '!.git/**' -g '!.hg/**' --column --line-number --no-heading --color=always --smart-case --max-columns=4096 -e",
 			},
 			keymap = {
 				builtin = {
@@ -47,16 +45,16 @@ return {
 				},
 			},
 		},
-		keys = function ()
+		keys = function()
 			local fzf = require("fzf-lua")
 			return {
-				{ "<C-S-p>", fzf.commands, mode = 'n', desc = "Command Pallete" },
-				{ "<leader> ", fzf.files, mode = 'n', desc = "Search File" },
-				{ "<leader>bb", fzf.buffers, mode = 'n', desc = "Search Buffers" },
-				{ "<leader>sg", fzf.live_grep, mode = 'n', desc = "Global Search" },
-				{ "<leader>o", fzf.lsp_document_symbols, mode = 'n', desc = "Search Symbols" },
-				{ "<leader>ca", fzf.lsp_code_actions, mode = 'n', desc = "Code Actions" },
-				{ "<leader>gs", git_status, mode = 'n', desc = "VCS status" },
+				{ "<C-S-p>",    fzf.commands,             mode = 'n', desc = "Command Pallete" },
+				{ "<leader> ",  fzf.files,                mode = 'n', desc = "Search File" },
+				{ "<leader>bb", fzf.buffers,              mode = 'n', desc = "Search Buffers" },
+				{ "<leader>sg", fzf.live_grep,            mode = 'n', desc = "Global Search" },
+				{ "<leader>o",  fzf.lsp_document_symbols, mode = 'n', desc = "Search Symbols" },
+				{ "<leader>ca", fzf.lsp_code_actions,     mode = 'n', desc = "Code Actions" },
+				{ "<leader>gs", git_status,               mode = 'n', desc = "VCS status" },
 
 			}
 		end

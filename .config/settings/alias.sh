@@ -73,3 +73,10 @@ function y() {
 }
 
 alias deployment='cd $HOME/builds/deployment && cd $(ls | fzf)'
+
+function findc() {
+	local file
+	file="$(hg log -b "$(hg branch)" -r "not merge()" --template "{files % '{file}\n'}" | sort -u | uniq | fzf)"
+	[ -n "$file" ] && hg log -r "sort(file('$file') and branch('$(hg branch)') and not merge(), -rev)"
+}
+

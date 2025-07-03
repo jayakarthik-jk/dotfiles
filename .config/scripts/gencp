@@ -1,55 +1,64 @@
-#!/bin/bash
+#!/bin/sh
 
-if [ -z "$1" ]; then
-  echo "No project name provided."
+# Prompt project using fzf
+project=$(ls "$HOME/builds/deployment" | fzf)
+
+if [ -z "$project" ]; then
+  echo "No project selected."
   exit 1
 fi
 
-deployment="$HOME/builds/deployment/$1"
-source="$HOME/builds/$1"
+project_dir="$HOME/builds/$project"
+deployment_dir="$HOME/builds/deployment/$project"
 
-if [ ! -d "$source" ] || [ ! -d "$deployment" ]; then
-  echo "project $1 not exists"
-  exit 1
-fi
+src1="source/library"
+src2="source/service"
 
+classpath_file="$project_dir/.classpath"
+project_file="$project_dir/.project"
 
-# tomcat_dependencies=$(fd \.jar $deployment/AdventNet/Sas/tomcat/lib -E '*mysql*')
-# dependencies=$(fd \.jar $deployment/AdventNet/Sas/tomcat/webapps/$1/WEB-INF/ -E '*mysql*')
+# Relative path fallback using Python (works on macOS + Linux)
+relpath() {
+  python3 -c "import os.path; print(os.path.relpath('$1', '$2'))"
+}
 
-tomcat_dependencies=$(fd \.jar $deployment/AdventNet/Sas/tomcat/lib)
-dependencies=$(fd \.jar $deployment/AdventNet/Sas/tomcat/webapps/grid/WEB-INF)
+# Collect all JAR files
+jar_list=$(find "$deployment_dir" -type f -name "*.jar")
 
-s=""
-for dependency in $tomcat_dependencies; do
-    s+="<classpathentry kind=\"lib\" path=\"$dependency\"/>"
-done
+echo "Generating .classpath..."
+{
+  echo '<?xml version="1.0" encoding="UTF-8"?>'
+  echo '<classpath>'
+  echo "  <classpathentry kind=\"src\" path=\"$src1\"/>"
+  echo "  <classpathentry kind=\"src\" path=\"$src2\"/>"
 
-for dependency in $dependencies; do
-    s+="<classpathentry kind=\"lib\" path=\"$dependency\"/>"
-done
+  echo "$jar_list" | while IFS= read -r jar; do
+    rel_jar=$(relpath "$jar" "$project_dir")
+    echo "  <classpathentry kind=\"lib\" path=\"$rel_jar\"/>"
+  done
 
-# <classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/$1_SDPLIVE"/>
+  echo '  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>'
+  echo '</classpath>'
+} > "$classpath_file"
 
-cat <<EOF >"$source"/.classpath
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-	<classpathentry kind="src" path="tools/export/src"/>
-	<classpathentry kind="src" path="mickeylite-master"/>
-	<classpathentry kind="src" path="tools/data_conversion/src"/>
-	<classpathentry excluding="export/src/|security/build.bat|data_conversion/src/" kind="src" path="tools"/>
-	<classpathentry kind="src" path="source/service"/>
-	<classpathentry excluding="com/manageengine/sdpod/dashboard/util/PieDataProperties.java|com/adventnet/servicedesk/software/form/SWListViewForm.java|com/manageengine/sdpod/servlet/OrgInvitation.java|com/manageengine/sdpod/servlet/SDPDataMigrationServlet.java|com/manageengine/sdpod/dashboard/util/AngularDataProperties.java|com/manageengine/sdpod/dashboard/util/ConstructFusionChart.java|com/adventnet/servicedesk/tasks/transformer/TasksCheckBoxTransformer.java|com/manageengine/sdpod/transformer/SDPODTransformer.java|com/adventnet/servicedesk/setup/action/ServiceCatalogListcontroller.java|com/adventnet/servicedesk/software/form/SoftwareHomeForm.java|com/manageengine/sdpod/udf/UDFDetail.java|com/manageengine/sdpod/dashboard/util/FusionChartUtil.java" kind="src" path="source/library"/>
-	<classpathentry kind="src" path="resources/src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/$1_SDPLIVE"/>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="output" path="bin"/>
-$s
-</classpath>
-EOF
+echo "Generating .project..."
+{
+  echo '<?xml version="1.0" encoding="UTF-8"?>'
+  echo '<projectDescription>'
+  echo "  <name>$project</name>"
+  echo '  <comment></comment>'
+  echo '  <projects></projects>'
+  echo '  <buildSpec>'
+  echo '    <buildCommand>'
+  echo '      <name>org.eclipse.jdt.core.javabuilder</name>'
+  echo '      <arguments></arguments>'
+  echo '    </buildCommand>'
+  echo '  </buildSpec>'
+  echo '  <natures>'
+  echo '    <nature>org.eclipse.jdt.core.javanature</nature>'
+  echo '  </natures>'
+  echo '</projectDescription>'
+} > "$project_file"
+
+echo "✅ Done! Files created in $project_dir"
+

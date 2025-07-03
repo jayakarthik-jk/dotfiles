@@ -19,7 +19,7 @@ return {
 					"vimdoc",
 					"query",
 					"prisma",
-					-- "zig"
+					"zig"
 				},
 				highlight = {
 					enable = true,
