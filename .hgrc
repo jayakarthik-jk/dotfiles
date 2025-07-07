@@ -13,9 +13,9 @@ color =
 share =
 hgext.mercurial_keyring = /Users/jaya-21208/Applications/mercurial_keyring/mercurial_keyring.py
 
-# [extdiff]
+[extdiff]
 # cmd.kdiff3 =
-# cmd.delta =
+cmd.delta =
 
 # Kdiff
 # [merge-tools]
@@ -31,5 +31,8 @@ p4.gui = True
 p4.args = $base $local $other $output
 p4.binary = False
 
-# [alias]
-# diff = delta
+[alias]
+diff = delta
+
+[delta]
+side-by-side = true

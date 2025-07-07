@@ -1,4 +1,4 @@
-local root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw', 'build.xml'}, { upward = true })[1])
+local root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw', 'build.xml' }, { upward = true })[1])
 
 local home = os.getenv('HOME')
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
@@ -12,20 +12,31 @@ local config = {
 	root_dir = root_dir,
 	init_options = {
 		bundles = {
-			vim.fn.glob("/Users/jaya-21208/Applications/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar", 1)
+			vim.fn.glob(
+			"/Users/jaya-21208/Applications/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar",
+				1)
 		}
 	},
 	settings = {
 		java = {
+			signatureHelp = { enabled = true };
+			contentProvider = { preferred = 'fernflower' };
 			eclipse = {
 				downloadSources = true,
-			},
+			};
+			sources = {
+				organizeImports = {
+					starThreshold = 9999;
+					staticStarThreshold = 9999;
+				};
+			};
 			configuration = {
 				updateBuildConfiguration = "interactive",
 				runtimes = {
 					{
+						default = true,
 						name = "JavaSE-11",
-						path = "/opt/homebrew/Cellar/openjdk@11/11.0.27/libexec/openjdk.jdk/Contents/Home/"
+						path = "/opt/homebrew/Cellar/openjdk@11/11.0.27/libexec/openjdk.jdk/Contents/Home/",
 					},
 				}
 			}
